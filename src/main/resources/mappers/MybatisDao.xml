@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ke.lisijia.spring_boot_demo.service.MybatisDao">
+    <resultMap id="BaseResultMap" type="student">
+        <id column="id" property="id"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="VARCHAR"/>
+        <result column="grade" property="grade" jdbcType="INTEGER"/>
+        <result column="classroom" property="classroom" jdbcType="INTEGER"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="findAll" resultType="student">
+        SELECT *
+        FROM student
+    </select>
+
+    <insert id="insertStudent" parameterType="student" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO student(name, gender, grade, classroom, score)
+        VALUES (#{name} , #{gender} , #{grade} , #{classroom} , #{score})
+    </insert>
+
+    <delete id="deleteStudent" parameterType="int">
+        DELETE FROM student
+        WHERE id = #{id}
+    </delete>
+
+    <update id="updateStudent" parameterType="student">
+        UPDATE student
+        SET name = #{name,jdbcType=VARCHAR}  , gender = #{gender,jdbcType=VARCHAR}  , grade = #{grade} ,
+            classroom = #{classroom} , score = #{score}
+        WHERE id = #{id}
+    </update>
+
+    <select id="findById" resultMap="BaseResultMap">
+        SELECT *
+        FROM student
+        WHERE id = #{id}
+    </select>
+</mapper>
