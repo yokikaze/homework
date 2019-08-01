@@ -2,6 +2,8 @@ package com.ke.lisijia.spring_boot_demo.model;
 
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,8 @@ public class Student {
      * 姓名
      */
     @Field("name")
+    @NotBlank(message = "姓名不能为空")
+    @Length(message = "姓名应在2-5个汉字", min = 2, max = 5)
     private String name;
 
     /**

@@ -1,5 +1,6 @@
 package com.ke.lisijia.spring_boot_demo.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ke.lisijia.spring_boot_demo.model.Student;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,22 @@ public class MybatisService {
 
     public String findById(int id) {
         Student student = mybatisDao.findById(id);
+        if(student == null) {
+            return "null";
+        }
         return student.toString();
     }
 
-    public String insertStudent() {
-        Student student = randomStudent();
+    public Student insertStudent(String jsonStudent) {
+        Student student = JSONObject.parseObject(jsonStudent, Student.class);
+        if(findById(student.getId())!="null" ){
+            return null;
+        }
         mybatisDao.insertStudent(student);
-        return student.toString();
+        return student;
     }
 
-    private static Student randomStudent() {
+    public static Student randomStudent() {
         Student student = new Student();
         student.setName(RandomStringUtils.randomAlphabetic(3));
         student.setGender(new Random().nextInt(2) >= 1 ? "男" : "女");
@@ -46,7 +53,8 @@ public class MybatisService {
         return student;
     }
 
-    public String deleteStudent(int id) {
+    public String deleteStudent(String idString) {
+        int id = Integer.parseInt(idString);
         Student student = mybatisDao.findById(id);
         mybatisDao.deleteStudent(student);
         return student.toString();
@@ -61,4 +69,22 @@ public class MybatisService {
         return student.toString();
     }
 
+    public String updateStudent(Student student) {
+        mybatisDao.updateStudent(student);
+        return student.toString();
+    }
+
+    public String updateName(int id, String name){
+        Student student = mybatisDao.findById(id);
+        student.setName(name);
+        mybatisDao.updateStudent(student);
+        return student.toString();
+    }
+
+    public Student updateStudentGender(String gender){
+        Student student = mybatisDao.findById(1);
+        student.setGender(gender);
+        mybatisDao.updateStudent(student);
+        return student;
+    }
 }

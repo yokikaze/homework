@@ -2,10 +2,12 @@ package com.ke.lisijia.spring_boot_demo.service;
 
 import com.ke.lisijia.spring_boot_demo.model.Student;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Mapper
+@Repository
 public interface MybatisDao {
     /**
      * 获取全部学生信息
