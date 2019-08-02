@@ -1,8 +1,6 @@
 package com.ke.lisijia.spring_boot_demo;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.ke.lisijia.spring_boot_demo.model.Student;
+import com.ke.lisijia.spring_boot_demo.service.MybatisService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +14,12 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
+
+import static org.hamcrest.Matchers.*;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -27,6 +30,9 @@ public class MockMvcTest {
 
     private MockMvc mockMvc;
     private MockHttpSession mockHttpSession;
+
+    @Autowired
+    private MybatisService mybatisService;
 
     @Before
     public void mockMvcInit() {
@@ -55,6 +61,7 @@ public class MockMvcTest {
      * @throws Exception
      */
     @Test
+    @Transactional
     public void insertStudent() throws Exception {
         String jsonStudent = "{\"id\":10,\"name\":\"qop\",\"gender\":\"男\",\"grade\":1,\"classroom\":3,\"score\":40}";
         mockMvc.perform(MockMvcRequestBuilders.post("/insertStudent")
@@ -93,5 +100,19 @@ public class MockMvcTest {
                 .session(mockHttpSession)
         ).andExpect(MockMvcResultMatchers.status().isOk())
          .andDo(MockMvcResultHandlers.print());
+    }
+
+    /**
+     * assertThat断言
+     */
+    @Test
+    public void assertThatTest() throws Exception {
+        String studentString = mybatisService.findById(1);
+        int num = 900;
+        assertThat(studentString, notNullValue());
+        assertThat(studentString, is(123));
+        assertThat(studentString, not(is("234")));
+        assertThat(num, allOf(greaterThan(100), lessThan(1000)));
+        assertThat(num, anyOf(greaterThan(900), lessThan(100)));
     }
 }

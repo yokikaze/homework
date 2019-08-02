@@ -5,11 +5,13 @@ import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.stereotype.Component;
 
 @Data
 @Component
+@Document(collection = "studentsTest")
 @Alias("student")
 public class Student {
     /**

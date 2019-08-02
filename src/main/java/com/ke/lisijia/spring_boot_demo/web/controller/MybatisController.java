@@ -56,7 +56,7 @@ public class MybatisController {
     }
 
     @RequestMapping(value = "/vaild", method = RequestMethod.POST)
-    @ResponseBody
+
     public String updateValid(@RequestBody @Valid Student student,
                               BindingResult bindingResult){
         System.out.println("asd");
@@ -66,6 +66,5 @@ public class MybatisController {
             return error.toString();
         }
         return mybatisService.updateStudent(student);
-
     }
 }
