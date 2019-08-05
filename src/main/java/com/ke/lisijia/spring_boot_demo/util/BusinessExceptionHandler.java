@@ -23,6 +23,7 @@ public class BusinessExceptionHandler {
         }else {
             ajaxObject.put("code", "500");
             ajaxObject.put("message", "未知错误，请联系管理员");
+            e.printStackTrace();
         }
         return ajaxObject;
     }

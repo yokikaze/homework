@@ -45,11 +45,13 @@ public class MybatisService {
 
     public static Student randomStudent() {
         Student student = new Student();
+        Random random = new Random();
+        student.setId(random.nextInt(100));
         student.setName(RandomStringUtils.randomAlphabetic(3));
-        student.setGender(new Random().nextInt(2) >= 1 ? "男" : "女");
-        student.setGrade(new Random().nextInt(3)+1);
-        student.setClassroom(new Random().nextInt(6)+1);
-        student.setScore(new Random().nextInt(101));
+        student.setGender(random.nextInt(2) >= 1 ? "男" : "女");
+        student.setGrade(random.nextInt(3)+1);
+        student.setClassroom(random.nextInt(6)+1);
+        student.setScore(random.nextInt(101));
         return student;
     }
 
