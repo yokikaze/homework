@@ -2,6 +2,7 @@ package com.ke.lisijia.spring_boot_demo.web.controller;
 
 import com.ke.lisijia.spring_boot_demo.exception.BusinessException;
 import com.ke.lisijia.spring_boot_demo.model.ConfigBean;
+import com.ke.lisijia.spring_boot_demo.service.RandomService;
 import org.apache.xmlbeans.impl.schema.BuiltinSchemaTypeSystem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,9 @@ public class WelcomeController {
     @Autowired
     ConfigBean configBean;
 
+    @Autowired
+    RandomService randomService;
+
     @RequestMapping("")
     public String welcome(){
         System.out.println(configBean.toString());
@@ -37,5 +41,10 @@ public class WelcomeController {
     public void jsonApi(ModelMap modelMap) {
         System.out.println("author");
         throw new BusinessException(900,"指定异常");
+    }
+
+    @RequestMapping("/randomTeacher")
+    public String randomTeacher() {
+        return randomService.randomTeacher();
     }
 }

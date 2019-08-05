@@ -1,6 +1,7 @@
 package com.ke.lisijia.spring_boot_demo.model;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Data
 public class ExcelData {

@@ -4,10 +4,14 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 @Data
 @Component
@@ -51,4 +55,20 @@ public class Student {
      */
     @Field("score")
     private int score;
+
+    /**
+     * 实例化之后的操作方法
+     */
+    @PostConstruct
+    public void postConstruct() {
+        System.out.println("已实例化Bean:Student");
+    }
+
+    /**
+     * 销毁之前的操作方法
+     */
+    @PreDestroy
+    public void preDestory() {
+        System.out.println("销毁Bean：Student");
+    }
 }

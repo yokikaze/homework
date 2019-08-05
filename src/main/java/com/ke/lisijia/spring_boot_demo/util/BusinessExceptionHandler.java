@@ -1,11 +1,7 @@
-package com.ke.lisijia.spring_boot_demo.config;
+package com.ke.lisijia.spring_boot_demo.util;
 
 import com.ke.lisijia.spring_boot_demo.exception.BusinessException;
-import com.ke.lisijia.spring_boot_demo.util.AjaxObject;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
