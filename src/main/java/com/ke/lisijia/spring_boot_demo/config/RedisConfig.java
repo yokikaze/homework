@@ -13,21 +13,21 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 @EnableCaching
 public class RedisConfig {
-    @Bean
-    public CacheManager cacheManager(RedisTemplate<?,?> redisTemplate) {
-        CacheManager cacheManager = new RedisCacheManager(redisTemplate);
-        return cacheManager;
-    }
 
     @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(connectionFactory);
+
         Jackson2JsonRedisSerializer serializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper mapper = new ObjectMapper();
         mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
@@ -44,4 +44,16 @@ public class RedisConfig {
         stringRedisTemplate.setConnectionFactory(factory);
         return stringRedisTemplate;
     }
+
+    @Bean
+    public CacheManager cacheManager(RedisTemplate redisTemplate) {
+      RedisCacheManager redisCacheManager = new RedisCacheManager(redisTemplate);
+      //默认超时时间，s
+      redisCacheManager.setDefaultExpiration(15);
+      Map<String, Long> expiresMap = new HashMap<>();
+      expiresMap.put("demo",1000L);
+      redisCacheManager.setExpires(expiresMap);
+      return redisCacheManager;
+    }
+
 }

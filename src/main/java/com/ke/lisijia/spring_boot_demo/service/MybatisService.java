@@ -1,9 +1,11 @@
 package com.ke.lisijia.spring_boot_demo.service;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ke.lisijia.spring_boot_demo.model.Student;
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -88,5 +90,10 @@ public class MybatisService {
         student.setGender(gender);
         mybatisDao.updateStudent(student);
         return student;
+    }
+
+    @Cacheable(value = "demo",key = "'demo:'+#name", unless = "#result==null")
+    public String findByName(String name) {
+        return JSON.toJSONString(mybatisDao.findByName(name));
     }
 }

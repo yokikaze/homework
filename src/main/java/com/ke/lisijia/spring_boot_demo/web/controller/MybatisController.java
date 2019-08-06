@@ -2,12 +2,10 @@ package com.ke.lisijia.spring_boot_demo.web.controller;
 
 import com.ke.lisijia.spring_boot_demo.model.Student;
 import com.ke.lisijia.spring_boot_demo.service.MybatisService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 
 
 @RestController
@@ -55,16 +53,9 @@ public class MybatisController {
         return mybatisService.updateName(id, name);
     }
 
-    @RequestMapping(value = "/vaild", method = RequestMethod.POST)
-
-    public String updateValid(@RequestBody @Valid Student student,
-                              BindingResult bindingResult){
-        System.out.println("asd");
-        if(bindingResult.hasErrors()){
-            ObjectError error = bindingResult.getAllErrors().iterator().next();
-            System.out.println(error);
-            return error.toString();
-        }
-        return mybatisService.updateStudent(student);
+    @RequestMapping("/findByName/{name}")
+    @ResponseBody
+    public String findByName(@PathVariable(value = "name") String name) {
+        return mybatisService.findByName(name);
     }
 }

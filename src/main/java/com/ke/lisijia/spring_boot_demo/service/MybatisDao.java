@@ -2,6 +2,7 @@ package com.ke.lisijia.spring_boot_demo.service;
 
 import com.ke.lisijia.spring_boot_demo.model.Student;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -42,4 +43,11 @@ public interface MybatisDao {
      * @return {@link Student}
      */
     Student findById(int id);
+
+    /**
+     * 根据姓名查找学生
+     * @param name
+     * @return
+     */
+    Student findByName(String name);
 }

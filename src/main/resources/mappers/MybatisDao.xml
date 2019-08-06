@@ -38,4 +38,11 @@
         FROM student
         WHERE id = #{id}
     </select>
+
+    <select id="findByName" resultMap="BaseResultMap">
+        SELECT *
+        FROM student
+        WHERE name = #{name}
+        LIMIT 1
+    </select>
 </mapper>
