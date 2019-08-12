@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
-@Component
+//@Component
 @Slf4j
 public class SinkMessageListener implements CommandLineRunner {
 

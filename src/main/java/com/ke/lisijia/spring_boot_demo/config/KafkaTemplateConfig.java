@@ -11,7 +11,7 @@ import org.springframework.kafka.core.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@Configuration
+//@Configuration
 public class KafkaTemplateConfig {
 
     //配置Kafka Template生产者步骤

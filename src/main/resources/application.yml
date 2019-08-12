@@ -60,29 +60,8 @@ spring:
     consumer:
       #用于表示此使用者所属组的唯一字符串
       group-id: executor
-      #消费者偏移量是否在后台定期提交，默认为true
-      enable-auto-commit: true
       # 密钥的反序列化器类
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      # 值的反序列化器类
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      # 如果"enable.auto.commit"为true，消费者偏移自动提交给kafka的频率(ms),默认值为5000
-      auto-commit-interval: 5000
-      #当Kafka中没有初始偏移量或者服务器上不再存在当前偏移量时怎么办，默认为latest,自动更新为最新偏移量
-      # 可选值为latest、earliest,none
-      auto-offset-reset: latest
-      #以逗号分隔的主机：端口对列表，用于建立Kafka群集的初始链接
-      bootstrap-servers: 127.0.0.1:9092
-      #Id在发出请求时传递给服务器；用于服务器端日志记录
-      client-id: 123
-      #如果没有足够数据满足获取请求最小数据量，服务器在回答获取请求之前将阻塞的最长时间(ms),默认为500
-      fetch-max-wait: 500
-      #服务器以字节为单位返回获取请求的最小数据量，默认为1
-      fetch-min-size: 10
-      #心跳与消费者协调员之间的预期时间，默认为3000
-      heartbeat-interval: 3000
-      #一次调用poll()操作时返回的最大记录数，默认为500
-      max-poll-records: 500
     producer:
       group-id: executor
       #key的序列化类
@@ -93,32 +72,18 @@ spring:
       batch-size: 16384
       #生产者用于缓冲等待发送到服务器的记录内存总字节数，默认33554432
       buffer-memory: 33554432
-      #procedure要求leader在考虑完成请求之前收到的确认数，用于控制发送记录在服务端的持久化，值可以如下：
-      #0  如果设置为0，生产者不会等待来自服务器的任何确认，该记录将立即添加到套接字缓冲区并视为已发送。在这种情况下，无法保证服务器已收到记录并重试配置将不会生效，每条记录返回的偏移量始终为-1
-      #1 意味着leader会将记录写入本地日志，但无需等待所有副本服务器的完全确认即可做出回应应，在这种情况下，如果leader在确认记录后立即失败，但在将数据复制到所有的副本服务器之前，则记录将会丢失。
-      #all  这意味着leader将等待完整的同步副本集以确认记录，这保证了只要至少一个同步副本服务器仍然存活，记录就不会丢失，这是最强有力的保证，这相当于acks = -1的设置。
-      acks: 1
-      #以逗号分隔的主机：端口对列表，用于建立Kafka群集的初始链接
-      bootstrap-servers: 127.0.0.1:9092
-      #Id在发出请求时传递给服务器；用于服务器端日志记录
-      client-id: 123
-      #生产者生成的所有数据压缩类型，此配置接受标准压缩编解码器（"gzip","snappy","lz4"）
-      #还接受"uncompressed"以及"producer"表示没有压缩以及保留生产者设置的原始压缩编解码器，默认为producer
-      compression-type: producer
-      #如果该值大于0，表示启用重试失败的发送次数
-      retries: 1
 
-    listener:
-      #当ack-mode为count或count_time时，偏移提交之间的记录数
-      ack-count: 10
-      #侦听器的ackMode
-      ack-mode: count
-      #在侦听器容器中运行的线程数
-      concurrency: 5
-      #轮询消费者时使用的超时（MS）
-      poll-timeout: 5000
-      #当ack-mode为count或count_time时，偏移提交的时间
-      ack-time: 3000
+  #邮件发送JavaMailSender
+  mail:
+    host: smtp.qq.com
+    username: 1419268805@qq.com
+    password: bwskiqditefbiihg
+    default-encoding: UTF-8
+    properties:
+      smtp.auth: true
+      smtp.starttls.enable: true
+      smtp.starttls.required: true
+
 #mybatis配置
 mybatis:
   type-aliases-package: com.ke.lisijia.spring_boot_demo.model
