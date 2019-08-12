@@ -86,7 +86,12 @@ spring:
       smtp.starttls.required: true
 
   #Spring cloud配置
-#  cloud:
+  cloud:
+    config:
+      # 远程配置中心的配置项可以覆盖本地的配置
+      allow-override: true
+      #远程配置中心的文件不覆盖本地变量
+      override-system-properties: false
 #    #consul
 #    consul:
 #      host: localhost
