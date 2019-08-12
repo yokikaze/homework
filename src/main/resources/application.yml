@@ -11,6 +11,7 @@ banner:
   charset: UTF-8
 
 server:
+  port: 8080
   tomcat:
     uri-encoding: UTF-8
 
@@ -24,7 +25,7 @@ spring:
     encoding: UTF-8
   #数据源
   datasource:
-    url: jdbc:mysql://localhost:3306/adc_spring?useSSL=false
+    url: jdbc:mysql://localhost:3306/adc_spring?useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -100,3 +101,11 @@ logging:
     root: INFO
   path: /log
 
+#Eureka配置
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    #禁用服务注册中心将自身作为客户端尝试注册自己
+    register-with-eureka: false
+    fetch-registry: false
