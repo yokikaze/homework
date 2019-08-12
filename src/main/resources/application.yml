@@ -85,6 +85,14 @@ spring:
       smtp.starttls.enable: true
       smtp.starttls.required: true
 
+  #Spring cloud配置
+#  cloud:
+#    #consul
+#    consul:
+#      host: localhost
+#      discovery:
+#        port: 8500
+
 #mybatis配置
 mybatis:
   type-aliases-package: com.ke.lisijia.spring_boot_demo.model
