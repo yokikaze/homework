@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @RestController
-@RequestMapping("/ribbon")
 public class ConsumerController {
 
     @Autowired
