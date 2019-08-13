@@ -73,6 +73,12 @@ spring:
       batch-size: 16384
       #生产者用于缓冲等待发送到服务器的记录内存总字节数，默认33554432
       buffer-memory: 33554432
+  #RabbitMQ 配置
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
   #邮件发送JavaMailSender
   mail:
