@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: eureka-consumer-feign
+server:
+  port: 2201
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8080/eureka/
