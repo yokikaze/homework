@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: eureka-client-after
+
+server:
+  port: 1101
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8080/eureka/
+  instance:
+    prefer-ip-address: true
+

@@ -4,10 +4,12 @@ spring:
   cloud:
     stream:
       bindings:
-        #输入通道主题名
-        Consumer-message:
+        #输入通道
+        input:
           #消费组
           group: consumer-A
+          #topic
+          destination: Consumer-message
 
 server:
   port: 2101

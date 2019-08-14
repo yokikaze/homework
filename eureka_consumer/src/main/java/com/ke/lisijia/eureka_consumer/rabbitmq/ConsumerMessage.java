@@ -4,7 +4,7 @@ import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.messaging.SubscribableChannel;
 
 public interface ConsumerMessage {
-    String INPUT = "Consumer-message";
+    String INPUT = "pipeline";
 
     @Input(value = INPUT)
     SubscribableChannel getInput();

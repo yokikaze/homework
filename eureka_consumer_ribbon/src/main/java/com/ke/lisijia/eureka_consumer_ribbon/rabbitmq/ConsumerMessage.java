@@ -8,7 +8,7 @@ import org.springframework.messaging.SubscribableChannel;
  */
 public interface ConsumerMessage {
 
-    String INPUT = "Consumer-message";
+    String INPUT = "input";
 
     @Input(value = INPUT)
     SubscribableChannel getInput();
