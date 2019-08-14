@@ -1,6 +1,17 @@
 spring:
   application:
     name: eureka-client
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    stream:
+      bindings:
+        output:
+          destination: Consumer-message
+
 server:
   port: 1001
 eureka:

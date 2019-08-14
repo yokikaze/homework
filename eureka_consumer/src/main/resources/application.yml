@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: eureka-consumer
+  cloud:
+    stream:
+      bindings:
+        Consumer-message:
+          #Ïû·Ñ×é
+          group: consumer-A
+          destination: Consumer-message
+
+server:
+  port: 2005
+
+eureka:
+  client:
+    serviceUrl.defaultZone: http://localhost:8080/eureka/
+
